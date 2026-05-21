@@ -2,24 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Urutan ini WAJIB diikuti karena adanya foreign key (Integritas Data):
+        // 1. Poliklinik dulu (Tabel Master Utama, tidak bergantung pada tabel lain)
+        // 2. Dokter (Bergantung pada tabel polikliniks via poliklinik_id)
+        // 3. JadwalPraktik (Bergantung pada tabel dokters via dokter_id)
+        $this->call([
+            PoliklinikSeeder::class,
+            DokterSeeder::class,
+            JadwalPraktikSeeder::class,
         ]);
     }
 }

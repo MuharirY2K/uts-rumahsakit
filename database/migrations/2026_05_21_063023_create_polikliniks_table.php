@@ -8,15 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Pastikan nama tabelnya 'polikliniks'
         Schema::create('polikliniks', function (Blueprint $table) {
             $table->id();
-            // Sepadan dengan 'kode_prodi' (contoh: POL-001, ANAK-02)
-            $table->string('kode_poli', 10)->unique();
-            // Sepadan dengan 'nama_prodi' (contoh: Poli Anak, Poli Jantung)
-            $table->string('nama_poli', 100);
-            // Sepadan dengan 'jenjang', disesuaikan menjadi kategori pelayanan di RS
+            $table->string('kode_poli', 10)->unique(); // Pastikan 'kode_poli'
+            $table->string('nama_poli', 100);          // Pastikan 'nama_poli'
             $table->enum('tipe_layanan', ['Reguler', 'Eksekutif', 'MCU', 'BPJS'])->default('Reguler');
-            // Sepadan dengan 'status' keaktifan program studi
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
         });

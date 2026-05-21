@@ -80,7 +80,7 @@
         <h6 class="m-0 font-weight-bold text-primary">
             <i class="fas fa-user-md mr-2"></i>Dokter Terbaru
         </h6>
-        <a href="{{ route('dokter.index') }}" class="btn btn-sm btn-primary">
+        <a href="" class="btn btn-sm btn-primary">
             Lihat Semua
         </a>
     </div>

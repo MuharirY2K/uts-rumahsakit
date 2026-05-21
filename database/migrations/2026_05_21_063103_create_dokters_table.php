@@ -11,23 +11,16 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
 
-            // Foreign Key ke tabel polikliniks (Sepadan dengan prodi_id)
+            // PASTIKAN BARIS INI MENGGUNAKAN poliklinik_id DAN polikliniks
             $table->foreignId('poliklinik_id')
-                  ->constrained('polikliniks')   // referensi ke tabel polikliniks
-                  ->onDelete('restrict');       // cegah hapus poli jika masih ada dokter di dalamnya
+                  ->constrained('polikliniks')
+                  ->onDelete('restrict');
 
-            // Sepadan dengan 'nim' (Nomor Surat Tanda Registrasi Dokter)
             $table->string('str_id', 20)->unique();
             $table->string('nama', 100);
             $table->string('email', 100)->unique();
-
-            // Sepadan dengan 'angkatan' (Tahun pertama dokter bergabung di RS)
             $table->year('tahun_bergabung');
-
-            // Sepadan dengan 'status' mahasiswa, disesuaikan untuk kepegawaian medis
-            $table->enum('status', ['aktif', 'cuti', 'resign'])
-                  ->default('aktif');
-
+            $table->enum('status', ['aktif', 'cuti', 'resign'])->default('aktif');
             $table->string('no_hp', 15)->nullable();
             $table->text('alamat')->nullable();
             $table->string('foto')->nullable();
